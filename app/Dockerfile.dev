@@ -1,0 +1,10 @@
+FROM python
+WORKDIR /src-flask
+
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY . .
+
+# WORKDIR /workspace/app
+CMD ["flask", "run", "--host=0.0.0.0"]
