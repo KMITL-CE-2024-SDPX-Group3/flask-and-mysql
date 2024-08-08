@@ -3,24 +3,40 @@ services:
     build:
       context: app
       dockerfile: Dockerfile.dev
+    env_file:
+      - .env.${ENV:-dev}
+    # command: printenv
     restart: always
-    volumes:
-      - ./app:/src-flask
     ports:
       - "8081:5000"
+    environment:
+      - MYSQL_HOST=${DB_HOST}
+      - MYSQL_USER=${MYSQL_DEV_USER}
+      - MYSQL_PASSWORD=${MYSQL_DEV_PASSWORD}
+      - MYSQL_DB=${MYSQL_DEV_DATABASE}
+      - FLASK_DEBUG=True
+    volumes:
+      - ./app:/src-flask
     depends_on:
       - db-dev
-        # condition: service_healthy
 
   # api-test:
   #   build:
   #     context: app
   #     dockerfile: Dockerfile.dev
+  #   env_file:
+  #     - .env.${ENV:-test}
   #   restart: always
   #   volumes:
   #     - ./app:/src-flask
   #   ports:
   #     - "8082:5000"
+  #   environment:
+  #     - MYSQL_HOST=localhost
+  #     - MYSQL_USER=${MYSQL_TEST_USER}
+  #     - MYSQL_PASSWORD=${MYSQL_TEST_PASSWORD}
+  #     - MYSQL_DB=${MYSQL_TEST_DATABASE}
+  #     # - FLASK_DEBUG=True
   #   depends_on:
   #     - db-dev
 
@@ -29,6 +45,8 @@ services:
       context: database
       dockerfile: Dockerfile.dev
     # restart: always
+    env_file:
+      - .env.${ENV:-dev}
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_DEV_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DEV_DATABASE}
@@ -37,7 +55,7 @@ services:
     volumes:
       - db-dev-data:/var/lib/mysql
     ports:
-      - "3306:3306"
+      - "3308:3306"
 
   # db-test:
   #   build:
