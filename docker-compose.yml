@@ -1,49 +1,55 @@
 services:
   api-dev:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ./app
+      dockerfile: Dockerfile.dev
+    env_file:
+      - .env.${ENV:-dev}
+    restart: always
     ports:
       - "8081:5000"
+    volumes:
+      - ./app:/app
     depends_on:
       - db-dev
 
   api-test:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ./app
+      dockerfile: Dockerfile.dev
+    env_file:
+      - .env.${ENV:-test}
+    restart: always
+    volumes:
+      - ./app:/app
     ports:
       - "8082:5000"
     depends_on:
-      - db-test
+      - db-dev
 
   db-dev:
     build:
-      context: .
-      dockerfile: Dockerfile
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_DEV_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DEV_DATABASE}
-      MYSQL_USER: ${MYSQL_DEV_USER}
-      MYSQL_PASSWORD: ${MYSQL_DEV_PASSWORD}
+      context: database
+      dockerfile: Dockerfile.dev
+    restart: always
+    env_file:
+      - .env.${ENV:-dev}
     volumes:
       - db-dev-data:/var/lib/mysql
     ports:
-      - "3306:3306"
+      - "3310:3306"
 
   db-test:
     build:
-      context: .
-      dockerfile: Dockerfile
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_TEST_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_TEST_DATABASE}
-      MYSQL_USER: ${MYSQL_TEST_USER}
-      MYSQL_PASSWORD: ${MYSQL_TEST_PASSWORD}
+      context: database
+      dockerfile: Dockerfile.dev
+    restart: always
+    env_file:
+      - .env.${ENV:-test}
     volumes:
       - db-test-data:/var/lib/mysql
     ports:
-      - "3307:3306"
+      - "3311:3306"
 
 volumes:
   db-dev-data:
