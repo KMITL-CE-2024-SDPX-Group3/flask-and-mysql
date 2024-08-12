@@ -11,7 +11,7 @@ def create_app():
 
     # Print configuration for debugging
     print(
-        f"Database Configuration: {{'user': '{app.config['MYSQL_USER']}', 'password': '{app.config['MYSQL_PASSWORD']}', 'host': '{app.config['MYSQL_HOST']}', 'database': '{app.config['MYSQL_DB']}'}}"
+        f"Database Configuration: {{'user': '{app.config['MYSQL_USER']}', 'password': '{app.config['MYSQL_PASSWORD']}', 'host': '{app.config['MYSQL_HOST']}', 'database': '{app.config['MYSQL_DATABASE']}'}}"
     )
 
     # Initialize the database

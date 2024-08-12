@@ -12,7 +12,7 @@ def get_database_config() -> dict[str, any]:
         "host": current_app.config["MYSQL_HOST"],
     }
     if is_initialize_database:
-        config["database"] = current_app.config["MYSQL_DB"]
+        config["database"] = current_app.config["MYSQL_DATABASE"]
     return config
 
 

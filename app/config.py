@@ -7,7 +7,7 @@ class Config:
     MYSQL_PASSWORD = os.getenv(
         "MYSQL_PASSWORD",
     )
-    MYSQL_DB = os.getenv("MYSQL_DB")
+    MYSQL_DATABASE = os.getenv("MYSQL_DATABASE")
     DEBUG = os.getenv("FLASK_DEBUG")
 
 
