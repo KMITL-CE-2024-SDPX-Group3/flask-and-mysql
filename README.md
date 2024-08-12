@@ -2,17 +2,17 @@
 
 ## For "dev" container
 
-| Container Name | Local Port | Container Port |
-| -------------- | ---------- | -------------- |
-| api-dev        | 8081       | 5000           |
-| db-dev         | 3310       | 3306           |
+| Container Name  | Local Port | Container Port |
+| --------------- | ---------- | -------------- |
+| api-dev (Flask) | 8081       | 5000           |
+| db-dev (MySQL)  | 3310       | 3306           |
 
 ## For "test" container
 
-| Container Name | Local Port | Container Port |
-| -------------- | ---------- | -------------- |
-| api-test       | 8082       | 5000           |
-| db-test        | 3311       | 3306           |
+| Container Name   | Local Port | Container Port |
+| ---------------- | ---------- | -------------- |
+| api-test (Flask) | 8082       | 5000           |
+| db-test (MySQL)  | 3311       | 3306           |
 
 ## Start running
 
