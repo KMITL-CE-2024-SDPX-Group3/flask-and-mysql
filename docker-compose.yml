@@ -2,7 +2,7 @@ services:
   api-dev:
     build:
       context: ./app
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     env_file:
       - .env.${ENV:-dev}
     restart: always
@@ -16,7 +16,7 @@ services:
   api-test:
     build:
       context: ./app
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     env_file:
       - .env.${ENV:-test}
     restart: always
@@ -30,7 +30,7 @@ services:
   db-dev:
     build:
       context: database
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     restart: always
     env_file:
       - .env.${ENV:-dev}
@@ -42,7 +42,7 @@ services:
   db-test:
     build:
       context: database
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     restart: always
     env_file:
       - .env.${ENV:-test}
