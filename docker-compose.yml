@@ -1,3 +1,5 @@
+name: flask-mysql
+
 services:
   api-dev:
     build:
