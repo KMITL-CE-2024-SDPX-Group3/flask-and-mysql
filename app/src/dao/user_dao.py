@@ -40,6 +40,7 @@ class UserDAO:
             return cursor.lastrowid
         except Error as e:
             print(f"Error inserting data into MySQL table: {e}")
+            self.connection.rollback()
             return None
         finally:
             if cursor:
