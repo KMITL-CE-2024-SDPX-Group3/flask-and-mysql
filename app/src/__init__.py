@@ -18,6 +18,7 @@ def create_app():
     with app.app_context():
         initialize_database()
 
+    print("Registering blueprints")
     # Register blueprints
     app.register_blueprint(user_blueprint)
     app.register_blueprint(playground_blueprint)

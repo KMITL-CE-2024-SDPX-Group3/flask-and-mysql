@@ -1,2 +1,4 @@
 __pycache__/
 playground/
+
+.env.local
