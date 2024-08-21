@@ -58,7 +58,7 @@ def initialize_database() -> None:
             print("Create new database")
             create_database(connection, current_app.config["MYSQL_DATABASE"])
             create_tables(connection)
-            insert_initial_data(connection)
+            # insert_initial_data(connection)
     finally:
         if connection and connection.is_connected():
             connection.close()

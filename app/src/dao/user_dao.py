@@ -45,3 +45,22 @@ class UserDAO:
         finally:
             if cursor:
                 cursor.close()
+
+    def get_all_users(self) -> list[User]:
+        if self.connection is None:
+            raise ValueError("Database connection is not established.")
+
+        cursor = None
+        try:
+            cursor = self.connection.cursor(dictionary=True)
+            cursor.execute("SELECT * FROM users")
+            rows = cursor.fetchall()
+            users = [User(id=row["id"], name=row["name"], age=row["age"])
+                     for row in rows]
+            return users
+        except Error as e:
+            print(f"Error reading data from MySQL table: {e}")
+            return []
+        finally:
+            if cursor:
+                cursor.close()

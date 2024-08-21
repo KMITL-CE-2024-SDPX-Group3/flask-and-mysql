@@ -12,3 +12,6 @@ class UserRepository:
 
     def add_user(self, user: User) -> Optional[int]:
         return self.user_dao.create_user(user)
+    
+    def get_users(self) -> Optional[int]:
+        return self.user_dao.get_all_users()

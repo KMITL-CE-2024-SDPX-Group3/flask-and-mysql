@@ -7,9 +7,21 @@ from ..models.user import User
 user_blueprint = Blueprint("user", __name__, url_prefix="/user")
 
 
-@user_blueprint.route("/all-user", methods=["GET"])
+@user_blueprint.route("/", methods=["GET"])
 def get_all_user():
-    return "test get all user 555555"
+    connection = get_database_connection()
+    user_dao = UserDAO(connection)
+    user_dao = UserDAO(connection)
+    user_repo = UserRepository(user_dao)
+    users = user_repo.get_users()
+    connection.close()
+
+    if not users:
+        return jsonify({"error": "No users found"}), 404
+
+    user_list = [{"id": user.id, "name": user.name, "age": user.age}
+                 for user in users]
+    return jsonify(user_list), 200
 
 
 @user_blueprint.route("/<int:user_id>", methods=["GET"])
